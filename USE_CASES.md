@@ -25,9 +25,9 @@ And the fourth fancy line :D
 ```
 
 
-# UC002 - Replacing a word in a groupping
+# UC002 - Replacing a word in a caapture group
 
-Replacing a group in a match.
+Replacing a capture group in a match.
 
 ```
 $ ls -AF

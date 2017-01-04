@@ -1,18 +1,18 @@
 from setuptools import find_packages, setup
 
 setup(
-    name='regulator',
+    name='regx',
     version='1.0.0',
-    description='Regular expression power tool.',
-    long_description=("Regulator is a regular expression based tool that allows you modify files with the full power of the regex engine. You can use groups, condition, sequences, registers and actions to acieve your editing goals. Made a mistake? Don't worry. Regulator is fully prepared, and has a non destructive rollback system."),
+    description='REGular eXpression power tool.',
+    long_description=("regx is a regular expression based tool that allows you modify files with the full power of the regex engine. You can use groups, condition, sequences, registers and actions to acieve your editing goals. Made a mistake? Don't worry. Regulator is fully prepared, and has a non destructive rollback system."),
     author='Tibor Simon',
     author_email='tibor@tiborsimon.io',
-    url='https://github.com/tiborsimon/regulator',
+    url='https://github.com/tiborsimon/regx',
     license='MIT',
     test_suite='test',
     keywords='regular expression regex tool power',
     packages=find_packages(),
-    scripts=['bin/regulator'],
+    scripts=['bin/regx'],
     install_requires=[
           'mock>=2.0.0',
           'termcolor'
