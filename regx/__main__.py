@@ -1,4 +1,5 @@
 
 
-if __name__ == "__main__":
-    print("regulator from inside..")
+if __name__ == '__main__':
+    print('regx is ready :P')
+

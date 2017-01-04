@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-echo "This is regulator"
-python -m regulator $(pwd) $@
+echo "This is regx"
+python -m regx $(pwd) $@

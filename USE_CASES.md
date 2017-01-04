@@ -12,10 +12,10 @@ This is another line that is also nice..
 Here comes the third nice one.
 And the fourth nice line :D
 
-$ regulator -p nice -a p1=fancy
+$ regx -p nice -a p1=fancy
 
 $ ls -AF
-input .regulator/
+input .regx/
 
 $ cat input
 This is a line that is fancy..
@@ -41,10 +41,10 @@ Red card.
 Purple stain.
 Black book.
 
-$ regulator -p (\w+)\s+book -a p1.1=Colorful
+$ regx -p (\w+)\s+book -a p1.1=Colorful
 
 $ ls -AF
-input .regulator/
+input .regx/
 
 $ cat input
 Nice card.
@@ -57,7 +57,7 @@ Colorful book.
 
 # UC003 - Rolling back the changes
 
-A rollback mechanism is provided to revert the changes step by step. One step equals to one `regulator` command execution.
+A rollback mechanism is provided to revert the changes step by step. One step equals to one `regx` command execution.
 
 ```
 $ ls -AF
@@ -71,10 +71,10 @@ Red card.
 Purple stain.
 Black book.
 
-$ regulator -p (\w+)\s+book -a p1.1=Colorful
+$ regx -p (\w+)\s+book -a p1.1=Colorful
 
 $ ls -AF
-input .regulator/
+input .regx/
 
 $ cat input
 Nice card.
@@ -84,12 +84,12 @@ Red card.
 Purple stain.
 Colorful book.
 
-$ regulator status
+$ regx status
 [1] - 1 file modified
 [0] - original state
 
 # by default, diff compares the current state to the original state, but it is possible to compare any two states
-$ regulator diff
+$ regx diff
 1 file modified on 2016.01.12. 23:45:43
 ./input
 2,3c2,3
@@ -103,12 +103,12 @@ $ regulator diff
 ---
 > Colorful book.
 
-$ regulator rollback 0
+$ regx rollback 0
 
-$ regulator status
+$ regx status
 [0] - original state
 
-$ regulator diff
+$ regx diff
 Nothing was changed.
 
 $ cat input
@@ -136,7 +136,7 @@ Red card.
 Purple stain.
 Black book.
 
-$ regulator -p (\w+)\s+book -a p1.1
+$ regx -p (\w+)\s+book -a p1.1
 Green
 Red
 Red
@@ -170,7 +170,7 @@ Red card.
 Purple stain.
 Black book.
 
-$ regulator -p (\w+)\s+book -a "The color of the book is {p1.1.lower}."
+$ regx -p (\w+)\s+book -a "The color of the book is {p1.1.lower}."
 The color of the book is green.
 The color of the book is red.
 The color of the book is red.
@@ -204,7 +204,7 @@ Red card.
 Purple stain.
 Black book.
 
-$ regulator -p (\w+)\s+book -a "if p1.1.lower == green: "
+$ regx -p (\w+)\s+book -a "if p1.1.lower == green: "
 The color of the book is green.
 The color of the book is red.
 The color of the book is red.
