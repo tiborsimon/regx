@@ -7,5 +7,6 @@ class PatternCases(TestCase):
 
             ]
         }
+        self.assertEqual(True, True)
 
 

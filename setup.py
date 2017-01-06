@@ -15,7 +15,8 @@ setup(
     scripts=['bin/regx'],
     install_requires=[
           'mock>=2.0.0',
-          'termcolor'
+          'termcolor',
+          'colorama'
     ],
     include_package_data=True,
     zip_safe=False,

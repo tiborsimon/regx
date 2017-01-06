@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-echo "This is regx"
+echo "REGX command line interface bash script."
 python -m regx $(pwd) $@
