@@ -1,20 +1,8 @@
 .PHONY: clean dist install uninstall dev-install dev-uninstall help test
 
 NAME := REGX
-PYTHON := python3
+PYTHON := python2
 USER := --user
-STATIC_INDICATOR := .INSTALLED
-DEVELOP_INDICATOR := .DEVELOP-INSTALLED
-
-BOLD := $(shell tput bold)
-RED := $(shell tput setaf 1)
-GREEN := $(shell tput setaf 2)
-YELLOW := $(shell tput setaf 3)
-RESET:= $(shell tput sgr0)
-
-OK      := [ $(BOLD)$(GREEN)OK$(RESET) ]
-WARNING := [ $(BOLD)$(YELLOW)!!$(RESET) ]
-ERROR   := [$(BOLD)$(RED)FAIL$(RESET)]
 
 help:
 	@echo ""
@@ -30,6 +18,19 @@ help:
 	@echo "$(BOLD)upload$(RESET)         Upload $(NAME) to PyPi with twine."
 	@echo "$(BOLD)clean$(RESET)          Cleans up all generated artifacts."
 	@echo ""
+
+BOLD := $(shell tput bold)
+RED := $(shell tput setaf 1)
+GREEN := $(shell tput setaf 2)
+YELLOW := $(shell tput setaf 3)
+RESET:= $(shell tput sgr0)
+
+OK      := [ $(BOLD)$(GREEN)OK$(RESET) ]
+WARNING := [ $(BOLD)$(YELLOW)!!$(RESET) ]
+ERROR   := [$(BOLD)$(RED)FAIL$(RESET)]
+
+STATIC_INDICATOR := .INSTALLED
+DEVELOP_INDICATOR := .DEVELOP-INSTALLED
 
 ERROR_INSTALLED := "$(ERROR) $(NAME) was already installed in static mode. Run $(BOLD)make uninstall$(RESET) first!"
 ERROR_DEV_INSTALLED := "$(ERROR) $(NAME) was already installed in development mode. Run $(BOLD)make dev-uninstall$(RESET) first!"
