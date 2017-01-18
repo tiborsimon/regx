@@ -1,6 +1,6 @@
 .installed.temp
-DEV-INSTALLED
-INSTALLED
+.DEVELOP-INSTALLED
+.INSTALLED
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

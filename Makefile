@@ -1,10 +1,20 @@
 .PHONY: clean dist install uninstall dev-install dev-uninstall help test
 
 NAME := REGX
+PYTHON := python3
+USER := --user
+STATIC_INDICATOR := .INSTALLED
+DEVELOP_INDICATOR := .DEVELOP-INSTALLED
 
 BOLD := $(shell tput bold)
+RED := $(shell tput setaf 1)
+GREEN := $(shell tput setaf 2)
 YELLOW := $(shell tput setaf 3)
 RESET:= $(shell tput sgr0)
+
+OK      := [ $(BOLD)$(GREEN)OK$(RESET) ]
+WARNING := [ $(BOLD)$(YELLOW)!!$(RESET) ]
+ERROR   := [$(BOLD)$(RED)FAIL$(RESET)]
 
 help:
 	@echo ""
@@ -21,37 +31,54 @@ help:
 	@echo "$(BOLD)clean$(RESET)          Cleans up all generated artifacts."
 	@echo ""
 
+ERROR_INSTALLED := "$(ERROR) $(NAME) was already installed in static mode. Run $(BOLD)make uninstall$(RESET) first!"
+ERROR_DEV_INSTALLED := "$(ERROR) $(NAME) was already installed in development mode. Run $(BOLD)make dev-uninstall$(RESET) first!"
+ERROR_NOT_INSTALLED := "$(ERROR) $(NAME) was not installed yet. Run $(BOLD)make install$(RESET) first!"
+ERROR_NOT_DEV_INSTALLED := "$(ERROR) $(NAME) was not installed in development mode. Run $(BOLD)make dev-install$(RESET) first!"
+
 test:
-	python2 -m unittest discover & python3 -m unittest discover
+	$(PYTHON) -m unittest discover
 
 install:
-	@python setup.py install --record INSTALLED --user
-	@echo "$(BOLD)$(YELLOW)$(NAME)$(RESET) was $(BOLD)$(YELLOW)installed$(RESET)."
+	@if [ -f $(STATIC_INDICATOR) ]; then echo $(ERROR_INSTALLED); exit 1; fi
+	@if [ -f $(DEVELOP_INDICATOR) ]; then echo $(ERROR_DEV_INSTALLED); exit 1; fi
+	@$(PYTHON) setup.py install --record $(STATIC_INDICATOR) $(USER)
+	@echo "$(OK) $(BOLD)$(NAME)$(RESET) was installed."
 
 uninstall:
-	@cat INSTALLED | xargs rm -rvf
-	@rm -rvf INSTALLED
-	@echo "$(BOLD)$(YELLOW)$(NAME)$(RESET) was $(BOLD)$(YELLOW)uninstalled$(RESET)."
+	@if [ -f $(DEVELOP_INDICATOR) ]; then echo $(ERROR_DEV_INSTALLED); exit 1; fi
+	@if [ ! -f $(STATIC_INDICATOR) ]; then echo $(ERROR_NOT_INSTALLED); exit 1; fi
+	@cat $(STATIC_INDICATOR) | xargs -r rm -rvf
+	@rm -rvf $(STATIC_INDICATOR)
+	@echo "$(OK) $(BOLD)$(NAME)$(RESET) was uninstalled."
 
 dev-install:
-	@python setup.py develop --user
-	touch DEV-INSTALLED
-	@echo "$(BOLD)$(YELLOW)$(NAME)$(RESET) development mode was $(BOLD)$(YELLOW)installed$(RESET)."
+	@if [ -f $(STATIC_INDICATOR) ]; then echo $(ERROR_INSTALLED); exit 1; fi
+	@if [ -f $(DEVELOP_INDICATOR) ]; then echo $(ERROR_DEV_INSTALLED); exit 1; fi
+	@$(PYTHON) setup.py develop $(USER)
+	touch $(DEVELOP_INDICATOR)
+	@echo "$(OK) $(BOLD)$(NAME)$(RESET) development mode was installed."
 
 dev-uninstall:
-	@python setup.py develop --user --uninstall
-	@rm -rfv $(shell which regx) DEV-INSTALLED
-	@echo "$(BOLD)$(YELLOW)$(NAME)$(RESET) development mode was $(BOLD)$(YELLOW)uninstalled$(RESET)."
+	@if [ -f $(STATIC_INDICATOR) ]; then echo $(ERROR_INSTALLED); exit 1; fi
+	@if [ ! -f $(DEVELOP_INDICATOR) ]; then echo $(ERROR_NOT_DEV_INSTALLED); exit 1; fi
+	$(PYTHON) setup.py develop $(USER) --uninstall
+	@rm -rfv $(shell which regx) $(DEVELOP_INDICATOR)
+	@echo "$(OK) $(BOLD)$(NAME)$(RESET) development mode was uninstalled."
 
 clean:
 	@rm -rfv dist regx.egg-info build
-	@find . -name "*.pyc" | xargs rm -fv
-	@find . -name "__pycache__" | xargs rm -fvr
+	@find . -name "*.pyc" | xargs -r rm -fv
+	@find . -name "__pycache__" | xargs -r rm -fvr
+	@echo "$(OK) $(BOLD)$(NAME)$(RESET) repo was cleaned."
+
 
 build: clean
 	@python2 setup.py sdist bdist_wheel
 	@python3 setup.py bdist_wheel
+	@echo "$(OK) $(BOLD)$(NAME)$(RESET) was built for python2 and python3."
 
 upload: dist
 	@twine upload dist/*
+	@echo "$(OK) $(BOLD)$(NAME)$(RESET) was uploaded to PyPi."
 
