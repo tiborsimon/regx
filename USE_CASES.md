@@ -25,7 +25,7 @@ And the fourth fancy line :D
 ```
 
 
-# UC002 - Replacing a word in a caapture group
+# UC002 - Replacing a word in a capture group
 
 Replacing a capture group in a match.
 
