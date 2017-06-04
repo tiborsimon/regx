@@ -4,9 +4,9 @@
 from unittest import TestCase
 
 try:
-    import mock
-except ImportError:
     from unittest import mock
+except ImportError:
+    import mock
 
 from regx.cli import parse_args
 
