@@ -5,7 +5,7 @@ python:
   - "3.4"
   - "3.5"
   - "3.6"
-  - "3.5-dev"
+  - "3.7-dev"
   - "nightly"
 # mock is already installed on travis
 install:

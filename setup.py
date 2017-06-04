@@ -19,7 +19,7 @@ setup(
         'console_scripts': [
             'regx = regx.cli:main'
         ]
-    }
+    },
     install_requires = [
         'mock>=2.0.0',
         'termcolor',
