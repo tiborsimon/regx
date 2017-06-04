@@ -1,7 +1,7 @@
 .PHONY: clean dist install uninstall dev-install dev-uninstall help test
 
 NAME := REGX
-PYTHON := python2
+PYTHON := python3
 USER := --user
 
 help:
