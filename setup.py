@@ -1,5 +1,11 @@
 from setuptools import find_packages, setup
 
+
+dependencies = []
+with open('requirements.txt') as f:
+    for line in f:
+        dependencies.append(line.strip())
+
 setup(
     name                 = 'regx',
     version              = '1.0.0',
@@ -14,17 +20,13 @@ setup(
     packages             = find_packages(),
     include_package_data = True,
     zip_safe             = False,
+    install_requires     = dependencies,
 
     entry_points = {
         'console_scripts': [
             'regx = regx.cli:main'
         ]
     },
-    install_requires = [
-        'mock>=2.0.0',
-        'termcolor',
-        'colorama'
-    ],
     classifiers = [
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
