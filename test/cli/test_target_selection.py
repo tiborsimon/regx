@@ -14,7 +14,7 @@ from regx.cli import parse_args
 class NonRecursiveTargetSelection(TestCase):
     def test__no_target_specified__empty_args_list(self):
         args = []
-        expected = None
+        expected = []
         result = parse_args(args)
         result = result['t']
         self.assertEqual(expected, result)
@@ -44,7 +44,7 @@ class NonRecursiveTargetSelection(TestCase):
 class RecursiveTargetSelection(TestCase):
     def test__no_target_specified__empty_args_list(self):
         args = []
-        expected = None
+        expected = []
         result = parse_args(args)
         result = result['tr']
         self.assertEqual(expected, result)
@@ -86,7 +86,7 @@ class RecursiveAndNonRecursive(TestCase):
 class ExcludeTargetSelection(TestCase):
     def test__no_exclude_pattern_specified__empty_args_list(self):
         args = []
-        expected = None
+        expected = []
         result = parse_args(args)
         result = result['e']
         self.assertEqual(expected, result)

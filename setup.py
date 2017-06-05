@@ -24,7 +24,7 @@ setup(
 
     entry_points = {
         'console_scripts': [
-            'regx = regx.cli:main'
+            'regx = regx:main'
         ]
     },
     classifiers = [
