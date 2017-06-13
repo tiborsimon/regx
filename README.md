@@ -5,4 +5,4 @@
 [![Updates](https://pyup.io/repos/github/tiborsimon/regx/shield.svg)](https://pyup.io/repos/github/tiborsimon/regx/)
 [![Python 3](https://pyup.io/repos/github/tiborsimon/regx/python-3-shield.svg)](https://pyup.io/repos/github/tiborsimon/regx/)
 
-<b>Reg</b>ular e<b>x</b>pression power tool.
+<strong>REG</strong>ular e<strong>X</strong>pression power tool.
